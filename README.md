@@ -16,11 +16,6 @@
 ![Advanced](https://img.shields.io/badge/Level-Advanced-red.svg)
 [![MIT](https://img.shields.io/badge/License-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
-# Description
-
-This NodeJS app demonstrates an end to end use case for external developers using Design Automation for Revit. In addition to using Design Automation for Revit REST APIs, this app also leverages other Autodesk Forge services like Data Management API (OSS), Viewer API and Model Derivative services.
-
-The sketcher is built using Redux with React and makes use of Flux architecture extensively.
 
 # How does it work?
 ![thumbnail](thumbnail.gif) 
