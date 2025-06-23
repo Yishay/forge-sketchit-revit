@@ -25,6 +25,7 @@ The sketcher is built using Redux with React and makes use of Flux architecture 
 # How does it work?
 ![thumbnail](thumbnail.gif) 
 
+
 # Main Parts of The Work
 1. Create a Revit Plugin to be used within AppBundle of Design Automation for Revit. Please check [PlugIn](./SketchIt/Revit.Addin/README.md) 
 2. Create your App, upload the AppBundle, define your Activity and test the workitem with [Insomnia Rest](./SketchIt/Insomnia.REST/README.md)  workflow.
