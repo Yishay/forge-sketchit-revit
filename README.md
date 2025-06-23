@@ -19,6 +19,7 @@
 # Description
 
 This NodeJS app demonstrates an end to end use case for external developers using Design Automation for Revit. In addition to using Design Automation for Revit REST APIs, this app also leverages other Autodesk Forge services like Data Management API (OSS), Viewer API and Model Derivative services.
+...
 
 The sketcher is built using Redux with React and makes use of Flux architecture extensively.
 
