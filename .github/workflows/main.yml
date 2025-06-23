@@ -1,0 +1,35 @@
+name: Detect Commit Origin (Manual Test)
+
+on:
+  workflow_dispatch:  # allows you to trigger it manually
+
+jobs:
+  detect-commit-origin:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout the code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # needed to detect merges
+
+      - name: 🔍 Detect if latest commit is user-originated
+        run: |
+          echo "🔍 Detecting commit origin..."
+          LATEST_COMMIT=$(git rev-parse HEAD)
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          COMMIT_AUTHOR_NAME=$(git log -1 --pretty=%an)
+          COMMIT_AUTHOR_EMAIL=$(git log -1 --pretty=%ae)
+          PARENT_COUNT=$(git rev-list --count --parents -n 1 HEAD)
+
+          echo "🧾 Commit Info:"
+          echo "  SHA: $LATEST_COMMIT"
+          echo "  Message: $COMMIT_MESSAGE"
+          echo "  Author: $COMMIT_AUTHOR_NAME <$COMMIT_AUTHOR_EMAIL>"
+          echo "  Parent count: $PARENT_COUNT"
+
+          if [[ "$COMMIT_MESSAGE" =~ ^Merge\ branch.* || "$COMMIT_MESSAGE" =~ ^Merge\ pull\ request.* || "$PARENT_COUNT" -gt 1 ]]; then
+            echo "⚠️ Detected merge/rebase commit."
+          else
+            echo "✅ Detected user commit."
+          fi
