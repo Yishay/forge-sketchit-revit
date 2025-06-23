@@ -22,6 +22,8 @@ This NodeJS app demonstrates an end to end use case for external developers usin
 
 The sketcher is built using Redux with React and makes use of Flux architecture extensively.
 
+Adding some text 
+
 # How does it work?
 ![thumbnail](thumbnail.gif) 
 
