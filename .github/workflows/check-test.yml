@@ -11,7 +11,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const output = `
+            const markdown = `
 ### ✅ SeaLights Pull Request Analysis – *Quality Gate Passed*
 
 #### 🔍 Conditions Checked
@@ -39,4 +39,4 @@ jobs:
 
 🔗 [View more details on SeaLights Pull Request Analysis](#)
 `;
-            core.notice(output);
+            console.log(markdown);
