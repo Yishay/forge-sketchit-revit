@@ -11,32 +11,33 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const markdown = `
-### ✅ SeaLights Pull Request Analysis – *Quality Gate Passed*
+            const markdown = [
+              "### ✅ SeaLights Pull Request Analysis – *Quality Gate Passed*",
+              "",
+              "#### 🔍 Conditions Checked",
+              "| Condition                     | Threshold        | Status     |",
+              "|------------------------------|------------------|------------|",
+              "| **New / Modified Coverage**  | ≥ **50.0%**       | ✅ Passed  |",
+              "| **Failed Tests**             | = **0**           | ✅ Passed  |",
+              "| **Entire Build**             | N/A               | ✅ Passed  |",
+              "",
+              "---",
+              "",
+              "#### 🧪 Test Summary",
+              "- **774** tests passed",
+              "- **0** failed",
+              "- **0** skipped",
+              "",
+              "---",
+              "",
+              "#### 📊 Coverage Overview",
+              "- **Overall Method Code Coverage**: **55.58%**",
+              "- ✅ All added/modified code tested in at least one test stage",
+              "- ✅ No code modifications detected",
+              "",
+              "---",
+              "",
+              "🔗 [View more details on SeaLights Pull Request Analysis](#)"
+            ].join('\n');
 
-#### 🔍 Conditions Checked
-| Condition                     | Threshold        | Status     |
-|------------------------------|------------------|------------|
-| **New / Modified Coverage**  | ≥ **50.0%**       | ✅ Passed  |
-| **Failed Tests**             | = **0**           | ✅ Passed  |
-| **Entire Build**             | N/A               | ✅ Passed  |
-
----
-
-#### 🧪 Test Summary
-- **774** tests passed  
-- **0** failed  
-- **0** skipped
-
----
-
-#### 📊 Coverage Overview
-- **Overall Method Code Coverage**: **55.58%**
-- ✅ All added/modified code tested in at least one test stage
-- ✅ No code modifications detected
-
----
-
-🔗 [View more details on SeaLights Pull Request Analysis](#)
-`;
             console.log(markdown);
