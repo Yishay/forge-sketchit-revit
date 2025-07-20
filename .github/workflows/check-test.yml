@@ -7,8 +7,9 @@ jobs:
   render-check:
     runs-on: ubuntu-latest
     permissions:
-      checks: write  # required!
+      checks: write
       contents: read
+
     steps:
       - name: Render Markdown Check
         uses: actions/github-script@v6
@@ -23,33 +24,6 @@ jobs:
               conclusion: "success",
               output: {
                 title: "SeaLights Pull Request Analysis",
-                summary: `
-### ✅ SeaLights Pull Request Analysis – *Quality Gate Passed*
-
-#### 🔍 Conditions Checked
-| Condition                     | Threshold        | Status     |
-|------------------------------|------------------|------------|
-| **New / Modified Coverage**  | ≥ **50.0%**       | ✅ Passed  |
-| **Failed Tests**             | = **0**           | ✅ Passed  |
-| **Entire Build**             | N/A               | ✅ Passed  |
-
----
-
-#### 🧪 Test Summary
-- **774** tests passed  
-- **0** failed  
-- **0** skipped
-
----
-
-#### 📊 Coverage Overview
-- **Overall Method Code Coverage**: **55.58%**
-- ✅ All added/modified code tested in at least one test stage
-- ✅ No code modifications detected
-
----
-
-🔗 [View more details on SeaLights Pull Request Analysis](#)
-                `
+                summary: `### ✅ SeaLights Pull Request Analysis – *Quality Gate Passed*\n\n#### 🔍 Conditions Checked\n| Condition                     | Threshold        | Status     |\n|------------------------------|------------------|------------|\n| **New / Modified Coverage**  | ≥ **50.0%**       | ✅ Passed  |\n| **Failed Tests**             | = **0**           | ✅ Passed  |\n| **Entire Build**             | N/A               | ✅ Passed  |\n\n---\n\n#### 🧪 Test Summary\n- **774** tests passed  \n- **0** failed  \n- **0** skipped\n\n---\n\n#### 📊 Coverage Overview\n- **Overall Method Code Coverage**: **55.58%**\n- ✅ All added/modified code tested in at least one test stage\n- ✅ No code modifications detected\n\n---\n\n🔗 [View more details on SeaLights Pull Request Analysis](#)`
               }
             });
