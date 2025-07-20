@@ -1,43 +1,55 @@
-name: Markdown Check Run Test
+name: SeaLights Check Markdown Test
 
 on:
   workflow_dispatch:
 
 jobs:
-  markdown-check:
+  render-check:
     runs-on: ubuntu-latest
+    permissions:
+      checks: write  # required!
+      contents: read
     steps:
-      - name: SeaLights PR Summary
+      - name: Render Markdown Check
         uses: actions/github-script@v6
         with:
           script: |
-            const markdown = [
-              "### ✅ SeaLights Pull Request Analysis – *Quality Gate Passed*",
-              "",
-              "#### 🔍 Conditions Checked",
-              "| Condition                     | Threshold        | Status     |",
-              "|------------------------------|------------------|------------|",
-              "| **New / Modified Coverage**  | ≥ **50.0%**       | ✅ Passed  |",
-              "| **Failed Tests**             | = **0**           | ✅ Passed  |",
-              "| **Entire Build**             | N/A               | ✅ Passed  |",
-              "",
-              "---",
-              "",
-              "#### 🧪 Test Summary",
-              "- **774** tests passed",
-              "- **0** failed",
-              "- **0** skipped",
-              "",
-              "---",
-              "",
-              "#### 📊 Coverage Overview",
-              "- **Overall Method Code Coverage**: **55.58%**",
-              "- ✅ All added/modified code tested in at least one test stage",
-              "- ✅ No code modifications detected",
-              "",
-              "---",
-              "",
-              "🔗 [View more details on SeaLights Pull Request Analysis](#)"
-            ].join('\n');
+            await github.checks.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: "SeaLights Pull Request Analysis",
+              head_sha: context.sha,
+              status: "completed",
+              conclusion: "success",
+              output: {
+                title: "SeaLights Pull Request Analysis",
+                summary: `
+### ✅ SeaLights Pull Request Analysis – *Quality Gate Passed*
 
-            console.log(markdown);
+#### 🔍 Conditions Checked
+| Condition                     | Threshold        | Status     |
+|------------------------------|------------------|------------|
+| **New / Modified Coverage**  | ≥ **50.0%**       | ✅ Passed  |
+| **Failed Tests**             | = **0**           | ✅ Passed  |
+| **Entire Build**             | N/A               | ✅ Passed  |
+
+---
+
+#### 🧪 Test Summary
+- **774** tests passed  
+- **0** failed  
+- **0** skipped
+
+---
+
+#### 📊 Coverage Overview
+- **Overall Method Code Coverage**: **55.58%**
+- ✅ All added/modified code tested in at least one test stage
+- ✅ No code modifications detected
+
+---
+
+🔗 [View more details on SeaLights Pull Request Analysis](#)
+                `
+              }
+            });
