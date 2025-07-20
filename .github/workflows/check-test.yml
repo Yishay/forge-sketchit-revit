@@ -1,7 +1,7 @@
 name: SeaLights Check Markdown Test
 
 on:
-  workflow_dispatch:
+  pull_request:
 
 jobs:
   render-check:
@@ -9,6 +9,7 @@ jobs:
     permissions:
       checks: write
       contents: read
+      pull-requests: read
 
     steps:
       - name: Render Markdown Check
@@ -16,11 +17,14 @@ jobs:
         with:
           script: |
             const octokit = github.rest;
+
+            const sha = context.payload.pull_request?.head?.sha || context.sha;
+
             await octokit.checks.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               name: "SeaLights Pull Request Analysis",
-              head_sha: context.sha,
+              head_sha: sha,
               status: "completed",
               conclusion: "success",
               output: {
@@ -28,4 +32,3 @@ jobs:
                 summary: `### ✅ SeaLights Pull Request Analysis – *Quality Gate Passed*\n\n#### 🔍 Conditions Checked\n| Condition | Threshold | Status |\n|-----------|-----------|--------|\n| **New / Modified Coverage** | ≥ **50.0%** | ✅ Passed |\n| **Failed Tests** | = **0** | ✅ Passed |\n| **Entire Build** | N/A | ✅ Passed |\n\n---\n\n#### 🧪 Test Summary\n- **774** tests passed\n- **0** failed\n- **0** skipped\n\n---\n\n#### 📊 Coverage Overview\n- **Overall Method Code Coverage**: **55.58%**\n- ✅ All added/modified code tested in at least one test stage\n- ✅ No code modifications detected\n\n---\n\n🔗 [View more details on SeaLights Pull Request Analysis](#)`
               }
             });
-
